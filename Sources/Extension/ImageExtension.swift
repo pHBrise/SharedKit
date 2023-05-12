@@ -6,17 +6,12 @@
 //
 
 import Foundation
-
+import UIKit
 
 
 extension UIImage {
-    init(packageResource name: String) {
-#if canImport(UIKit)
-        let image = UIImage(named: name, in: Bundle.module, compatibleWith: nil)
-        self.init(uiImage: image)
-#else
-        self.init(name)
-#endif
+    public class func packageResource(named: String) -> UIImage? {
+        return UIImage(named: named, in: Bundle.module, compatibleWith: nil)
     }
 }
 

@@ -23,6 +23,7 @@ let package = Package(
         .target(
             name: "SharedKit",
             dependencies: [],
+            path: "Sources",
             resources: [
                 .process("Resources")
             ]),

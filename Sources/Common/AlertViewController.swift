@@ -8,7 +8,7 @@
 import UIKit
 import ExtensionKit
 
-enum AlertStyle {
+public enum AlertStyle {
     case normal
     case warning
 }
@@ -16,16 +16,16 @@ enum AlertStyle {
 open class AlertViewController: BaseViewController {
     
     @IBOutlet weak var tranparentView: UIView!
-    @IBOutlet weak var alertView: UIView!
+    @IBOutlet weak var alertView: RoundedView!
     @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var confirmButton: RoundedButton!
+    @IBOutlet weak var closeButton: RoundedButton!
     
-    var style:AlertStyle = .normal
+    public var style:AlertStyle = .normal
     
     var doNotClose = false
     var isShowCloseButton = false
@@ -34,14 +34,14 @@ open class AlertViewController: BaseViewController {
     var cancelHandle: (() -> Void)?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        super.init(nibName: nibNameOrNil, bundle: .module)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         accessibilityLabel = "Alert View"
         titleLabel.font = UIFont.kanitRegular(ofSize: 20)
@@ -61,14 +61,14 @@ open class AlertViewController: BaseViewController {
 
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.tranparentView.alpha = 0.8
         })
     }
 
-    func show(viewController: UIViewController = UIApplication.viewControllerAlert(), title: String, subTitle: String? = nil, confirmButton: Bool = true, confrimTitle: String = "confirm".localize() , cancelButton: Bool = true, cancelTitle: String = "cancel".localize(), confirm confirmHandle: (() -> Void)? = nil, cancel cancelHandle: (() -> Void)? = nil, notClose: Bool = false, showClose: Bool = false) {
+    open func show(viewController: UIViewController = UIApplication.viewControllerAlert(), title: String, subTitle: String? = nil, confirmButton: Bool = true, confrimTitle: String = "confirm".localize() , cancelButton: Bool = true, cancelTitle: String = "cancel".localize(), confirm confirmHandle: (() -> Void)? = nil, cancel cancelHandle: (() -> Void)? = nil, notClose: Bool = false, showClose: Bool = false) {
         self.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         viewController.present(self, animated: false, completion: { [weak self] in
@@ -100,7 +100,7 @@ open class AlertViewController: BaseViewController {
         })
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !doNotClose {
             if self.confirmButton.isHidden, self.cancelButton.isHidden {
                 self.dismiss(animated: true, completion: nil)
