@@ -1,0 +1,17 @@
+/* 
+  General.strings
+  ULife
+
+  Created by Phanvit Chevamongkolnimit on 3/5/2566 BE.
+  
+*/
+
+"cancel" = "ยกเลิก";
+"ok" = "ตกลง";
+"yes" = "ใช่";
+"no" = "ไม่ใช่";
+"next" = "ถัดไป";
+"reset" = "รีเซ็ต";
+"confirm" = "ยืนยัน";
+"update" = "อัปเดต";
+"accept" = "ยอมรับ";
