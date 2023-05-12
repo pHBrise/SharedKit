@@ -10,13 +10,9 @@ import Foundation
 
 
 extension UIImage {
-    init(packageResource name: String, ofType type: String) {
+    init(packageResource name: String) {
 #if canImport(UIKit)
-        guard let path = Bundle.module.path(forResource: name, ofType: type),
-              let image = UIImage(contentsOfFile: path) else {
-            self.init(name)
-            return
-        }
+        let image = UIImage(named: name, in: Bundle.module, compatibleWith: nil)
         self.init(uiImage: image)
 #else
         self.init(name)
